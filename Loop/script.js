@@ -2,11 +2,12 @@
 
 let budget = +prompt("Ваш бюджет на месяц?");
 console.log(typeof(budget));
-console.log(Number(budget));
+console.log(budget);
 // проверка на корректность ввода бюджета
 
-    if ( budget === 0 ) {
-        alert("Cумма бюджета мала");
+    if ( budget != 'number' ) {
+        
+        console.log("ERR");
         
     }
 
@@ -54,4 +55,4 @@ for ( let i = 0 ; i < 5 ;) {
 
 console.log(appData)
 
-alert(` Ваш бюджет на день составляет ${appData.sum / 30}`);
+alert(`Ваш бюджет на день составляет ${appData.sum / 30}`);
