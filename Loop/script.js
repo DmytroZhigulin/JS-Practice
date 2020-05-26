@@ -1,3 +1,4 @@
+"use strict";
 // Бюджет на месяц + расчет бюджета на день в вычетом обязательных расходов.
 
 let budget = +prompt("Ваш бюджет на месяц?");
@@ -39,11 +40,11 @@ for ( let i = 0 ; i < 5 ;) {
         appData.sum = appData.sum - b;
         
     } else if ( (typeof(a)) === 'number' ){
-        alert('Назовите категорию корректно!')
+        alert('Назовите категорию корректно!');
         
     }
 
-    let c = confirm ("Внести еще пункт расходов?") ? i++ : i = 5; // тернарный оператор
+    const c = confirm ("Внести еще пункт расходов?") ? i++ : i = 5; // тернарный оператор
 
     // if ( c === false) {
     //     i = 5
@@ -53,6 +54,6 @@ for ( let i = 0 ; i < 5 ;) {
 
 }
 
-console.log(appData)
+console.log(appData);
 
 alert(`Ваш бюджет на день составляет ${appData.sum / 30}`);
