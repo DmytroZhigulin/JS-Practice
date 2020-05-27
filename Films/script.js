@@ -1,9 +1,11 @@
 "use strict";
 
 const numberOfFilms = +prompt("How much films you have watched?", "0");
+let userRang;
 
 
 let personalMovieDB = {
+    userLevel: userRang,
     count: numberOfFilms,
     movies: {},
     actors: {},
@@ -12,13 +14,23 @@ let personalMovieDB = {
 };
 
     if ( personalMovieDB.count >= 1 && personalMovieDB.count < 10 ) {
+
+        personalMovieDB.userLevel = "beginner";
         alert("You've watched quite a few films");
+
     } else if ( personalMovieDB.count >= 10 && personalMovieDB.count <= 30 ) {
+
+        personalMovieDB.userLevel = "basic";
         alert("You're a classic viewer");
+
     } else if ( personalMovieDB.count > 30 ) {
+
+        personalMovieDB.userLevel = "pro";
         alert("You're big film fan!");
     } else {
+
         alert("ERROR");
+        
     }
 
 
