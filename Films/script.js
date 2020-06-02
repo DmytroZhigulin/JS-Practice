@@ -21,7 +21,54 @@ let personalMovieDB = {
     actors: {},
     genres: [],
     private: false,
+
+
+    toggleVisibleMyDB: function() {
+        if ( personalMovieDB.private === false) {
+            personalMovieDB.private = true;
+            console.log("This is a privat account");
+            
+        } else {
+            personalMovieDB.private = false;
+            console.log(personalMovieDB);
+            
+        }
+    },
+    
+
+
+    
+    writeYourGenres: function() {
+
+    let myGenre;
+    let genreNum = 1;
+
+        for ( let i = 0; i < 3; i++) {
+
+            myGenre = prompt(`Your favorite genre number ${genreNum}`);
+            // вместо genreNum можно указать просто i, i = 1; i <=3; i++.
+
+            if (myGenre != '' && myGenre != null) {
+
+                console.log("GOOD");
+                personalMovieDB.genres.push(myGenre);
+                genreNum++; // увеличиваем значение переменной на 1
+
+            } else {
+
+                alert("Please, enter genre");
+                i--; //Возвращаемся на шаг назад
+            }
+        }
+
+        console.log(personalMovieDB.genres);
+        personalMovieDB.genres.forEach(function(item, index, array) {
+            console.log(`Favorite genre № ${index + 1} is ${item}`);
+        });
+    }
 };
+
+
 
 
 function rangUserCount() {
@@ -49,11 +96,10 @@ function rangUserCount() {
 rangUserCount();
 
     
-
+console.log(Object.keys(personalMovieDB)); // Возвращает массив свойств объекта
 
 let filmName,
     filmRate;
-
 
 
 
@@ -97,58 +143,14 @@ function rememberMyFilms() {
 rememberMyFilms();
 
 
-
-let myGenre;
-let genreNum = 1;
-
-
-function writeYourGenres() {
-
-    for ( let i = 0; i < 3; i++) {
-
-        myGenre = prompt(`Your favorite genre number ${genreNum}`);
-        // вместо genreNum можно указать просто i, i = 1; i <=3; i++.
-
-        if (myGenre != '' && myGenre != null) {
-
-            console.log("GOOD");
-            personalMovieDB.genres.push(myGenre);
-            genreNum++; // увеличиваем значение переменной на 1
-
-        } else {
-
-            alert("Please, enter genre");
-            i--; //Возвращаемся на шаг назад
-        }
-    }
-}
-writeYourGenres();
-
-
-
-
-
-    
-function showMyDB() {
-    personalMovieDB.private === false ? console.log(personalMovieDB) : console.log("This is a privat account");
-}
-showMyDB();
-
-// Или так
-// function showMyDB (hidden) {
-//     if (!hidden) {
-//         console.log(personalMovieDB)
-//     } else {
-//         console.log("This is a privat account");
-//     }
+// for ( let key in personalMovieDB) {
+//     console.log(`Свойство ${key} имеет значение ${personalMovieDB[key]}`);
 // }
-// showMyDB(personalMovieDB.private)
 
 
 
-// console.log(personalMovieDB);
 
 
-    
+
 
 
