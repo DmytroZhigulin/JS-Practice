@@ -1,51 +1,91 @@
 "use strict";
 
-let numberOfFilms;
 let userRang;
 
-function start() {
-
-    numberOfFilms = +prompt("How much films you have watched?", "0");
-
-    while( numberOfFilms == '' || numberOfFilms == null || isNaN(numberOfFilms)) {
-        numberOfFilms = +prompt("Insert correct number please", "0");
-    }
-}
-start();
-
-
-let personalMovieDB = {
+let personalMovieDB = { 
     userLevel: userRang,
-    count: numberOfFilms,
+    count: 0,
     movies: {},
     actors: {},
     genres: [],
     private: false,
 
 
-    toggleVisibleMyDB: function() {
-        if ( personalMovieDB.private === false) {
-            personalMovieDB.private = true;
-            console.log("This is a privat account");
-            
+    start: function() {
+
+        personalMovieDB.count = +prompt("How much films you have watched?", "0");
+    
+        while( personalMovieDB.count == '' || personalMovieDB.count == null || isNaN(personalMovieDB.count)) {
+            personalMovieDB.count = +prompt("Insert correct number please", "0");
+        }
+    },
+    rememberMyFilms: function() {
+
+        for( let i = 0; i < 10;) {
+    
+            let filmName = prompt("Last seen movie?");
+            let filmRate = prompt("Rate last movie");
+    
+            if ( filmName != null && filmRate != null && filmName != '' && filmRate != '' && filmName.length < 50 ) {
+    
+                personalMovieDB.movies[filmName] = filmRate;
+                // alert("Nice!!!!");
+    
+                const more = confirm("Add one more movie?") ? i++ : i=10; // Тернарный оператор.
+    
+            } else {
+    
+                alert("Fill all fields please!");
+                i--;
+            }
+      
+        }
+    
+            // do {
+            //     filmName = prompt("Last seen movie?");
+            //     filmRate = prompt("Rate last movie");
+    
+            //     if ( filmName != null && filmRate != null && filmName != '' &&
+            //  filmRate != '' && filmName.length < 50 ) {
+    
+            //         personalMovieDB.movies[filmName] = filmRate;
+            //         console.log("Nice!!!!")
+    
+            //     } else {
+            //         console.log("ERRRORRRRRRRRR!")
+            //     }
+                    
+            // } while ( confirm("Add one more movie?") === true );
+    },
+     rangUserCount: function() {
+
+        if ( personalMovieDB.count >= 1 && personalMovieDB.count < 10 ) {
+    
+            personalMovieDB.userLevel = "beginner";
+            alert("You've watched quite a few films");
+    
+        } else if ( personalMovieDB.count >= 10 && personalMovieDB.count <= 30 ) {
+    
+            personalMovieDB.userLevel = "basic";
+            alert("You're a classic viewer");
+    
+        } else if ( personalMovieDB.count > 30 ) {
+    
+            personalMovieDB.userLevel = "pro";
+            alert("You're big film fan!");
         } else {
-            personalMovieDB.private = false;
-            console.log(personalMovieDB);
+    
+            alert("ERROR");
             
         }
     },
-    
-
-
-    
     writeYourGenres: function() {
 
-    let myGenre;
-    let genreNum = 1;
+        let genreNum = 1;
 
         for ( let i = 0; i < 3; i++) {
 
-            myGenre = prompt(`Your favorite genre number ${genreNum}`);
+            let myGenre = prompt(`Your favorite genre number ${genreNum}`);
             // вместо genreNum можно указать просто i, i = 1; i <=3; i++.
 
             if (myGenre != '' && myGenre != null) {
@@ -61,86 +101,22 @@ let personalMovieDB = {
             }
         }
 
-        console.log(personalMovieDB.genres);
+        // console.log(personalMovieDB.genres);
         personalMovieDB.genres.forEach(function(item, index, array) {
             console.log(`Favorite genre № ${index + 1} is ${item}`);
         });
-    }
+    },
+    toggleVisibleMyDB: function() {
+        personalMovieDB.private === false ? personalMovieDB.private = true : personalMovieDB.private = false;
+    },
+    showMyDB: function(hidden) {
+        if(!hidden) {
+            console.log(personalMovieDB);
+        }
+    },
 };
 
-
-
-
-function rangUserCount() {
-
-    if ( personalMovieDB.count >= 1 && personalMovieDB.count < 10 ) {
-
-        personalMovieDB.userLevel = "beginner";
-        alert("You've watched quite a few films");
-
-    } else if ( personalMovieDB.count >= 10 && personalMovieDB.count <= 30 ) {
-
-        personalMovieDB.userLevel = "basic";
-        alert("You're a classic viewer");
-
-    } else if ( personalMovieDB.count > 30 ) {
-
-        personalMovieDB.userLevel = "pro";
-        alert("You're big film fan!");
-    } else {
-
-        alert("ERROR");
-        
-    }
-}
-rangUserCount();
-
-    
 console.log(Object.keys(personalMovieDB)); // Возвращает массив свойств объекта
-
-let filmName,
-    filmRate;
-
-
-
-function rememberMyFilms() {
-
-    for( let i = 0; i < 10;) {
-
-        filmName = prompt("Last seen movie?");
-        filmRate = prompt("Rate last movie");
-
-        if ( filmName != null && filmRate != null && filmName != '' && filmRate != '' && filmName.length < 50 ) {
-
-            personalMovieDB.movies[filmName] = filmRate;
-            // alert("Nice!!!!");
-
-            const more = confirm("Add one more movie?") ? i++ : i=10; // Тернарный оператор.
-
-        } else {
-
-            alert("Fill all fields please!");
-            i--;
-        }
-  
-    }
-
-        // do {
-        //     filmName = prompt("Last seen movie?");
-        //     filmRate = prompt("Rate last movie");
-
-        //     if ( filmName != null && filmRate != null && filmName != '' && filmRate != '' && filmName.length < 50 ) {
-
-        //         personalMovieDB.movies[filmName] = filmRate;
-        //         console.log("Nice!!!!")
-
-        //     } else {
-        //         console.log("ERRRORRRRRRRRR!")
-        //     }
-                
-        // } while ( confirm("Add one more movie?") === true );
-}
-rememberMyFilms();
 
 
 // for ( let key in personalMovieDB) {
